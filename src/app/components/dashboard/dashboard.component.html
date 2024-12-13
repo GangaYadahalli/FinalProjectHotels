@@ -1,0 +1,113 @@
+<h1 style="color:goldenrod">HOTEL MANAGEMENT SYSTEM</h1>
+<style>
+   .bg-purple {
+    background:    mistyrose; 
+    background-blend-mode: overlay; /* Combine gradient and color */
+  }
+
+
+  h1 {
+    color: goldenrod;
+    text-align: center;
+    margin-top: 1rem;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2)
+    
+  }
+  .navbar .nav-link {
+    color:  rgb(74, 178, 192)!important; /* White text for better contrast */
+    font-weight: bold; /* Make the text bold */
+    margin: 0 0.5rem; /* Add spacing between links */
+    transition: color 0.3s ease-in-out; /* Smooth transition for hover */
+  }
+ 
+  .navbar .nav-link:hover {
+    color: Navy !important; /* Change color to goldenrod on hover */
+  }
+ 
+
+</style>
+<!-- A grey horizontal navbar that becomes vertical on small screens -->
+<nav class="navbar navbar-expand-sm bg-purple" >
+  <div class="container d-flex justify-content-center">
+    <!-- Links -->
+    <ul class="navbar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link"  href="#">Home</a>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Users
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" routerLink="/users/add">Add User</a></li>
+            <li><a class="dropdown-item" routerLink="/users/display">Display Users</a></li>
+          </ul>
+        </li>
+
+      <!-- <li class="nav-item">
+        <a class="nav-link"  routerLink="/users/getallUsers">DisplayUsers</a>
+      </li> -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Hotels
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" routerLink="/hotels/add">Add Hotels</a></li>
+          <li><a class="dropdown-item" routerLink="/hotels/display">Display Hotels</a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Rooms
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" routerLink="/rooms/add">Add Rooms</a></li>
+          <li><a class="dropdown-item" routerLink="/rooms/display">Display Rooms</a></li>
+        </ul>
+      </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link" routerLink="/getallHotels">DisplayHotels</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/getallRooms">DisplayRooms</a>
+      </li> -->
+      <!-- <li class="nav-item">
+        <a class="nav-link" routerLink="/users/insertUsers">Users</a>
+      </li> -->
+      <!-- <li class="nav-item">
+        <a class="nav-link" routerLink="/insertHotels">AddHotels</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/insertRooms">AddRooms</a>
+      </li> -->
+
+      <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <form class="d-flex"  #searchInput="ngForm" (ngSubmit)="find(searchInput)">
+            <input class="form-control me-2" type="search" name="data"  ngModel  placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+      
+    </ul>
+  </div>
+  </nav>
+<br>
+
+<!-- <div  *ngIf="userList.length > 0" class="container col-lg-4">
+  <table class="table table-dark">
+ 
+     <tr>  <th>USERID</th><th>EMAIL</th><th>NAME</th><th>PHONENUMBER</th><th>PASSWORD</th><th>DATECREATED</th><th>USERROLE</th><th></th> </tr>
+     <tr *ngFor="let user of userList"> 
+         <td>{{user.userId}}</td><td>{{user.email}}</td><td>{{user.name}}</td><td>{{user.phoneNumber}}</td><td>{{user.password}}</td><td>{{user.dateCreated}}</td><td>{{user.userRole}}</td>
+         
+      </tr>
+     
+ 
+  </table> -->
+
+
+
+<router-outlet></router-outlet>

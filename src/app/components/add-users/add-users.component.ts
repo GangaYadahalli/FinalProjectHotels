@@ -1,0 +1,72 @@
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UserRole, Users } from 'src/app/model/Users';
+import { UsersService } from 'src/app/services/users.service';
+
+@Component({
+  selector: 'app-add-users',
+  templateUrl: './add-users.component.html',
+  styleUrls: ['./add-users.component.css']
+})
+export class AddUsersComponent implements OnInit {
+
+  userRoles = Object.values(UserRole).filter(key => isNaN(Number(key)));
+  userForm!: FormGroup;
+
+  constructor(private fb: FormBuilder, private service: UsersService) { }
+
+  ngOnInit(): void {
+    this.userForm = this.fb.group({
+      userId: ['', [Validators.required,Validators.min(1), Validators.pattern('^[0-9]*$')]],
+      email: ['', [Validators.required, Validators.email]],
+      name: ['',[ Validators.required, Validators.minLength(5)]],
+      phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      password: ['', Validators.required],
+      dateCreated: ['', Validators.required],
+      userRole: [null, Validators.required]
+    });
+  }
+
+  addUser(): void {
+    if (this.userForm.valid) {
+      const user: Users = this.userForm.value;
+      this.service.addUser(user).subscribe(
+        (response) => {
+          console.log(response);
+          alert(response.userId + " user added successfully");
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    }
+  }
+}
+//export class AddUsersComponent {
+
+
+//   userRoles = Object.values(UserRole).filter(key => isNaN(Number(key)));; 
+
+  
+//   constructor(private  service:UsersService){
+
+//   }
+
+
+
+//   addUser(user:Users){
+
+//             this.service.addUser(user).subscribe(
+
+//                 (response)=>{  console.log(response)
+
+//                   alert(response.userId +" user added successfully")
+//                 } ,
+
+//                 (err)=>{ console.log(err)}
+
+
+
+//             );
+// }
+// }
