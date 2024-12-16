@@ -1,6 +1,6 @@
-<h1>Add Room Details</h1>
+<h1>Update Room Details</h1>
 
-<form class="container col-md-4" #formData="ngForm" (ngSubmit)="addRoom(formData.value)">
+<form class="container col-md-4" #formData="ngForm" (ngSubmit)="updateRoom(formData.value)">
     <!-- Room ID -->
     <div class="form-group">
         <label for="roomId">Enter ROOMID:</label>
@@ -146,5 +146,5 @@
     </div>
 
     <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary" [disabled]="formData.invalid">Add Room</button>
+    <button type="submit" class="btn btn-primary" [disabled]="formData.invalid">Update Room</button>
 </form>

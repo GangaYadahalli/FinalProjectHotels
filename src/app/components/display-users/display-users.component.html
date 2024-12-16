@@ -7,6 +7,8 @@
     <tr *ngFor="let user of userList"> 
         <td>{{user.userId}}</td><td>{{user.email}}</td><td>{{user.name}}</td><td>{{user.phoneNumber}}</td><td>{{user.password}}</td><td>{{user.dateCreated}}</td><td>{{user.userRole}}</td>
         <td><button type="button" class="btn btn-danger"  (click)="deleteById(user.userId)" >Delete</button></td>
+        <!--<td><button type="button" class="btn btn-danger" (click)="deleteById(user.userId.toString())">Delete</button></td>-->
+
      </tr>
     
 

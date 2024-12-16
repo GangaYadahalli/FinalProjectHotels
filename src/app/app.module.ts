@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddUsersComponent } from './components/add-users/add-users.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { UsersService } from './services/users.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AddHotelsComponent } from './components/add-hotels/add-hotels.component';
@@ -14,10 +14,15 @@ import { DisplayHotelsComponent } from './components/display-hotels/display-hote
 import { DisplayRoomsComponent } from './components/display-rooms/display-rooms.component';
 import { SearchComponent } from './components/search/search.component';
 import { DisplayUsersComponent } from './components/display-users/display-users.component';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { CommonModule, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { RoomsService } from './services/rooms.service';
 import { HotelsService } from './services/hotels.service';
 import { SecurityComponent } from './components/security/security.component';
+import { SearchHotelsComponent } from './components/search-hotels/search-hotels.component';
+import { SearchRoomsComponent } from './components/search-rooms/search-rooms.component';
+import { UpdateUsersComponent } from './components/update-users/update-users.component';
+import { UpdateRoomsComponent } from './components/update-rooms/update-rooms.component';
+import { UpdateHotelsComponent } from './components/update-hotels/update-hotels.component';
 
 
 @NgModule({
@@ -31,14 +36,20 @@ import { SecurityComponent } from './components/security/security.component';
     AddRoomsComponent,
     DisplayHotelsComponent,
     DisplayRoomsComponent,
-    SecurityComponent
+    SecurityComponent,
+    SearchHotelsComponent,
+    SearchRoomsComponent,
+    UpdateUsersComponent,
+    UpdateRoomsComponent,
+    UpdateHotelsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule
     
   ],
   providers: [UsersService, RoomsService, HotelsService,{ provide: LocationStrategy, useClass: PathLocationStrategy }],

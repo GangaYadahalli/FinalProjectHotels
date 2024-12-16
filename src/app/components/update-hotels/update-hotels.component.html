@@ -1,5 +1,5 @@
-<h1>Add Hotel Details</h1>
-<form class="container col-md-4" #formData="ngForm" (ngSubmit)="addHotel(formData.value)">
+<h1>Update Hotel Details</h1>
+<form class="container col-md-4" #formData="ngForm" (ngSubmit)="updateHotel(formData.value)">
     <!-- Hotel ID -->
     <div class="form-group">
       <label for="hotelId">Enter HOTELID:</label>
@@ -142,6 +142,6 @@
     </div>
   
     <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary" [disabled]="formData.invalid">Add Hotel</button>
+    <button type="submit" class="btn btn-primary" [disabled]="formData.invalid">Update Hotel</button>
   </form>
   

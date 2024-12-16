@@ -19,6 +19,11 @@ export class HotelsService {
         return  this.http.post<Hotels>(this.baseURL+"insert",hotel);
 
     }
+    updateHotel(hotel:Hotels):Observable<Hotels>{
+
+        return  this.http.put<Hotels>(this.baseURL+"update",hotel);
+
+    }
 
     getAll():Observable<Hotels[]>{
 
@@ -27,15 +32,28 @@ export class HotelsService {
     }
     delete(hotelId:number):Observable<string>{
 
-        return  this.http.delete<string>(this.baseURL+hotelId);
+        return  this.http.delete<string>(this.baseURL+"delete/"+hotelId);
   
       }
-      find(data:string):Observable<Hotels[]>{
+    findByCity(data:string):Observable<Hotels[]>{
 
 
         console.log(data)
-       return this.http.get<Hotels[]>(this.baseURL+`get/hotelName/${data}`);
+       return this.http.get<Hotels[]>(this.baseURL+`getByCity/${data}`);
     
-      }
+    }
+    findByHotelsById(data:string):Observable<Hotels[]>{
+
+
+        console.log(data)
+       return this.http.get<Hotels[]>(this.baseURL+`getbyid/${data}`);
+    
+    }
+    findByRating(data:string):Observable<Hotels[]>{
+
+        console.log(data)
+       return this.http.get<Hotels[]>(this.baseURL+`getByRating/${data}`);
+    
+    }
 
 }

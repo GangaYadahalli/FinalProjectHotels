@@ -23,51 +23,63 @@ export class UsersService {
 
       }
 
-      getAll():Observable<Users[]>{
-
-        return  this.http.get<Users[]>(this.baseURL+"getall");
+      updateUser(user:Users):Observable<Users>{
 
 
+        return  this.http.put<Users>(this.baseURL+"update",user);
 
     }
-    // users.service.ts
-delete(userId: number, token: string): Observable<string> {
-  const tokenString = "Bearer " + token; // Format the token
-  const headers = new HttpHeaders({
-    'Authorization': tokenString, // Add Authorization header
-  });
+    //   getAll():Observable<Users[]>{
 
-  return this.http.delete<string>(`${this.baseURL}delete/${userId}`, { headers });
-}
+    //     return  this.http.get<Users[]>(this.baseURL+"getall");
 
+
+
+    // }
     // delete(userId: number, token: string): Observable<string> {
-    //   const tokenString = "Bearer " + token; // Format the token as required
+    //   const tokenString = 'Bearer ' + token;
+    //   console.log("Authorization Token:", tokenString); // Format the token
     //   const headers = new HttpHeaders({
-    //     'Authorization': tokenString // Add the Authorization header
+    //     Authorization: tokenString, // Add Authorization header
     //   });
-    
-    //   return this.http.delete<string>(this.baseURL + `delete/${userId}`, { headers });
+  
+    //   return this.http.delete<string>(`${this.baseURL}delete/${userId}`, { headers });
     // }
     
 
-    // delete(userId:number):Observable<string>{
+    delete(userId:number):Observable<string>{
 
-    //   return  this.http.delete<string>(this.baseURL+`delete/${userId}`);
+      return  this.http.delete<string>(this.baseURL+`delete/${userId}`);
 
-    // }
+    }
    
-  //  searchByUserName(name:string):Observable<Users[]>{
-
-  //   return    this.http.get<Users[]>(this.baseURL+"?name="+name);
-
-
-  // }
-  find(data:string):Observable<Users[]>{
+ 
+  findById(data:string):Observable<Users[]>{
 
 
     console.log(data)
-   return this.http.get<Users[]>(this.baseURL+`get/name/${data}`);
+   return this.http.get<Users[]>(this.baseURL+`getbyid/${data}`);
 
+  }
+  findByName(data:string):Observable<Users[]>{
+
+
+    console.log(data)
+   return this.http.get<Users[]>(this.baseURL+`getByName/${data}`);
+
+  }
+ 
+
+  updatePhoneNumber(id: number, phoneNumber: number): Observable<string> {
+    return this.http.put<string>(`${this.baseURL}/updatePhoneNumber/${id}`, null, {
+      params: { phoneNumber: phoneNumber.toString() },
+    });
+  }
+
+  updatePassword(id: number, password: string): Observable<string> {
+    return this.http.put<string>(`${this.baseURL}/updatePassword/${id}`, null, {
+      params: { password },
+    });
   }
   }
     

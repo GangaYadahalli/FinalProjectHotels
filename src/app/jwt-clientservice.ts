@@ -1,55 +1,40 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { UsersService } from './services/users.service';
+import { Observable } from 'rxjs/internal/Observable';
+import { Users } from './model/Users';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JwtClientService {
+  private token: string | null = null;
+  private baseURL: string = 'http://localhost:8080/api/';
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
+  setToken(token: string): void {
+    this.token = token;
+  }
 
-    baseURL:string = 'http://localhost:8080/api/';
+  getToken(): string | null {
+    return this.token;
+  }
 
-    getGeneratedToken(requestBody: any){
+  // Getting the token from login response
+  getGeneratedToken(requestBody: any): Observable<any> {
+    return this.http.post(this.baseURL+"users/login/authenticate", requestBody, { responseType: 'text' as 'json' });
+  }
 
-        return this.http.post(this.baseURL+"users/login/authenticate",requestBody,{responseType: 'text' as 'json'});
+  authorizationTest(token: string): Observable<Users[]> {
+    let tokenString = "Bearer" +token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+      
+    }).set("Authorization", tokenString);
 
-    }
-
-    authorizationTest(token:any){
-
-          let tokenString = "Bearer "+token;
-
-          const headers =  new HttpHeaders({
-                 'Content-Type': 'application/json',
-                 'Access-Control-Allow-Origin': 'http://localhost:4200'
-               }).set("Authorization",tokenString);
-
-
-        return this.http.get(this.baseURL,{headers,responseType:'text' as 'json'});
-
-    }
-    // jwt-client.service.ts
-deleteUser(token: any, userId: number) {
-  const tokenString = "Bearer " + token;
-  const headers = new HttpHeaders({
-    'Authorization': tokenString, // Add Authorization header
-  });
-
-  return this.http.delete(`${this.baseURL}users/delete/${userId}`, { headers, responseType: 'text' as 'json' });
+    return this.http.get<Users[]>(this.baseURL+"users/getall", { headers });
+  }
 }
 
-    // deleteUser(token: any, userId: number) {
-    //   const tokenString = "Bearer " + token;
-    //   const headers = new HttpHeaders({
-    //     'Authorization': tokenString
-    //   });
-    
-    //   return this.http.delete(`${this.baseURL}users/delete/${userId}`, { headers, responseType: 'text' as 'json' });
-    // }
-    
-    
-
-
-}

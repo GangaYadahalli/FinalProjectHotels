@@ -20,6 +20,12 @@ export class RoomsService {
         return  this.http.post<Rooms>(this.baseURL+"insert",room);
 
     }
+    updateRoom(room: Rooms):Observable<Rooms>{
+
+      return  this.http.put<Rooms>(this.baseURL+"update",room);
+
+  }
+    
     getAll():Observable<Rooms[]>{
 
         return  this.http.get<Rooms[]>(this.baseURL+"getall");
@@ -27,14 +33,16 @@ export class RoomsService {
     }
     delete(roomId:number):Observable<string>{
 
-        return  this.http.delete<string>(this.baseURL+roomId);
+        return  this.http.delete<string>(this.baseURL+"delete/"+roomId);
   
       }
-      find(data:string):Observable<Rooms[]>{
+      findByRoomsId(data:string):Observable<Rooms[]>{
 
 
         console.log(data)
-       return this.http.get<Rooms[]>(this.baseURL+`get/name/${data}`);
+       return this.http.get<Rooms[]>(this.baseURL+`getbyid/${data}`);
     
       }
+
+      
 }

@@ -8,6 +8,7 @@ export class Hotels
     description:string='';
     contactNumber:number=0;
     rating:number=0.0;
+    userId=0;
 
 
 }

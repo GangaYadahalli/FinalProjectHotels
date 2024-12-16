@@ -1,19 +1,18 @@
 
 export enum UserRole {
-    GUEST='GUEST',
+   GUEST='GUEST',
    HOTELOWNER='HOTELOWNER' , 
    ADMIN='ADMIN'
   }
   
-  export interface Users
+  export class Users
   {
-      userId:number;
-      email:string;
-      name:string;
-      phoneNumber:number;
-      password:string;
-      dateCreated:Date ;
-      userRole: UserRole ;
-  
-  
+      userId:number=0;
+      email:string='';
+      password:string='';
+      name:string='';
+      phoneNumber:number=0;
+      dateCreated:Date=new Date() ;
+      userRole: UserRole | null = null;;
+      updatedAt:Date=new Date();
   }

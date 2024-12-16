@@ -1,53 +1,81 @@
 <h1 style="color:goldenrod">HOTEL MANAGEMENT SYSTEM</h1>
+
 <style>
    .bg-purple {
-    background:    mistyrose; 
-    background-blend-mode: overlay; /* Combine gradient and color */
+    background: mistyrose; 
+    background-blend-mode: overlay;
   }
-
 
   h1 {
     color: goldenrod;
     text-align: center;
     margin-top: 1rem;
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2)
-    
   }
+
   .navbar .nav-link {
-    color:  rgb(74, 178, 192)!important; /* White text for better contrast */
-    font-weight: bold; /* Make the text bold */
-    margin: 0 0.5rem; /* Add spacing between links */
-    transition: color 0.3s ease-in-out; /* Smooth transition for hover */
+    color: rgb(74, 178, 192)!important;
+    font-weight: bold;
+    margin: 0 0.5rem;
+    transition: color 0.3s ease-in-out;
   }
- 
+
   .navbar .nav-link:hover {
-    color: Navy !important; /* Change color to goldenrod on hover */
+    color: Navy !important;
   }
- 
 
+  .dropdown-menu {
+    max-height: 500px;
+    max-width: 500px;
+  }
+
+  .dropdown-item {
+    padding: 10px 80px;
+  }
+
+  .nav-link.dropdown-toggle {
+    font-size: 1rem;
+  }
 </style>
-<!-- A grey horizontal navbar that becomes vertical on small screens -->
-<nav class="navbar navbar-expand-sm bg-purple" >
+
+<nav class="navbar navbar-expand-sm bg-purple">
   <div class="container d-flex justify-content-center">
-    <!-- Links -->
     <ul class="navbar-nav">
-
       <li class="nav-item">
-        <a class="nav-link"  href="#">Home</a>
-        
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Users
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" routerLink="/users/add">Add User</a></li>
-            <li><a class="dropdown-item" routerLink="/users/display">Display Users</a></li>
-          </ul>
-        </li>
+        <a class="nav-link" href="#">Home</a>
+      </li>
 
-      <!-- <li class="nav-item">
-        <a class="nav-link"  routerLink="/users/getallUsers">DisplayUsers</a>
-      </li> -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Users
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" routerLink="/users/add">Add Users</a></li>
+          <li><a class="dropdown-item" routerLink="/users/display">Display Users</a></li>
+          <li><a class="dropdown-item" routerLink="/users/update">Update Users</a></li>
+          <li>
+            <form class="d-flex" #idSearchForm="ngForm" (ngSubmit)="findById(idSearchForm)">
+              <input class="form-control me-2" type="search" name="data" ngModel placeholder="Search by Id" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search by Id</button>
+            </form>
+          </li>
+          <li>
+            <form class="d-flex" #nameSearchForm="ngForm" (ngSubmit)="findByName(nameSearchForm)">
+              <input class="form-control me-2" type="search" name="data" ngModel placeholder="Search by Name" aria-label="Search">
+              <button class="btn btn-outline-primary" type="submit">Search by Name</button>
+            </form>
+          </li>
+          <li>
+            <form class="d-flex" #idSearchForm="ngForm" (ngSubmit)="updatePhoneNumber(idSearchForm)">
+              <input class="form-control me-2" type="number" name="id" ngModel placeholder="User ID" aria-label="User ID" required>
+              <input class="form-control me-2" type="number" name="phoneNumber" ngModel placeholder="New Phone Number" aria-label="Phone Number" required>
+              <button class="btn btn-outline-success" type="submit">Update Phone Number</button>
+            </form>
+          </li>
+          
+        </ul>
+      </li>
+
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Hotels
@@ -55,8 +83,28 @@
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
           <li><a class="dropdown-item" routerLink="/hotels/add">Add Hotels</a></li>
           <li><a class="dropdown-item" routerLink="/hotels/display">Display Hotels</a></li>
+          <li><a class="dropdown-item" routerLink="/hotels/update">Update Hotels</a></li>
+          <li>
+            <form class="d-flex" #idHotelsSearchForm="ngForm" (ngSubmit)="findByHotelsId(idHotelsSearchForm)">
+              <input class="form-control me-2" type="search" name="data" ngModel placeholder="Search by Id" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search by Id</button>
+            </form>
+          </li>
+          <li>
+            <form class="d-flex" #citySearchForm="ngForm" (ngSubmit)="findHotelsByCity(citySearchForm)">
+              <input class="form-control me-2" type="search" name="data" ngModel placeholder="Search by City" aria-label="Search">
+              <button class="btn btn-outline-primary" type="submit">Search by City</button>
+            </form>
+          </li>
+          <li>
+            <form class="d-flex" #ratingSearchForm="ngForm" (ngSubmit)="findHotelsByRating(ratingSearchForm)">
+              <input class="form-control me-2" type="search" name="data" ngModel placeholder="Search by Rating" aria-label="Search">
+              <button class="btn btn-outline-primary" type="submit">Search by Rating</button>
+            </form>
+          </li>
         </ul>
       </li>
+
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Rooms
@@ -64,50 +112,19 @@
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
           <li><a class="dropdown-item" routerLink="/rooms/add">Add Rooms</a></li>
           <li><a class="dropdown-item" routerLink="/rooms/display">Display Rooms</a></li>
+          <li><a class="dropdown-item" routerLink="/rooms/update">Update Rooms</a></li>
+          <li>
+            <form class="d-flex" #idRoomsSearchForm="ngForm" (ngSubmit)="findByRoomsId(idRoomsSearchForm)">
+              <input class="form-control me-2" type="search" name="data" ngModel placeholder="Search by Id" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search by Id</button>
+            </form>
+          </li>
         </ul>
       </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link" routerLink="/getallHotels">DisplayHotels</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/getallRooms">DisplayRooms</a>
-      </li> -->
-      <!-- <li class="nav-item">
-        <a class="nav-link" routerLink="/users/insertUsers">Users</a>
-      </li> -->
-      <!-- <li class="nav-item">
-        <a class="nav-link" routerLink="/insertHotels">AddHotels</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/insertRooms">AddRooms</a>
-      </li> -->
-
-      <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-          <form class="d-flex"  #searchInput="ngForm" (ngSubmit)="find(searchInput)">
-            <input class="form-control me-2" type="search" name="data"  ngModel  placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
-        </div>
-      </nav>
-      
     </ul>
   </div>
-  </nav>
+</nav>
+<!-- <button routerLink="/login" >HR Dashboard</button> -->
 <br>
-
-<!-- <div  *ngIf="userList.length > 0" class="container col-lg-4">
-  <table class="table table-dark">
- 
-     <tr>  <th>USERID</th><th>EMAIL</th><th>NAME</th><th>PHONENUMBER</th><th>PASSWORD</th><th>DATECREATED</th><th>USERROLE</th><th></th> </tr>
-     <tr *ngFor="let user of userList"> 
-         <td>{{user.userId}}</td><td>{{user.email}}</td><td>{{user.name}}</td><td>{{user.phoneNumber}}</td><td>{{user.password}}</td><td>{{user.dateCreated}}</td><td>{{user.userRole}}</td>
-         
-      </tr>
-     
- 
-  </table> -->
-
-
 
 <router-outlet></router-outlet>

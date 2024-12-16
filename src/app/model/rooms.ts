@@ -15,5 +15,6 @@ export class Rooms
     availabilityStatus:AvailabilityStatus| null = null;
     capacity:string='';
     description:string='';
+    hotelId:number=0;
 
 }
