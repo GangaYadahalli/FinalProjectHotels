@@ -8,6 +8,9 @@ package com.hexaware.hotelbookingsystem.entities;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -53,13 +56,16 @@ public class Payments {
 
 	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "userId", nullable = false)
+	@JsonManagedReference
 	private Users user; // Many-to-One relationship with Users
 
 	@ManyToOne
 	@JoinColumn(name = "booking_id", referencedColumnName = "bookingId", nullable = false)
+	@JsonManagedReference
 	private Bookings booking; // Many-to-One relationship with Bookings
 
 	@ManyToOne
+	@JsonManagedReference
 	@JoinColumn(name = "hotel_id", referencedColumnName = "hotelId", nullable = false) // Ensure correct column mapping
 	private Hotels hotel;
 

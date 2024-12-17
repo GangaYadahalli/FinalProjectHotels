@@ -16,15 +16,15 @@ public class UsersDto {
 	private String name;
 	private Long phoneNumber;
 	private LocalDate dateCreated;
-	private UserRole userrole;
+	private String userRole;
 	private LocalDate updatedAt;
 	
-	public enum UserRole {
-		GUEST, HOTELOWNER , ADMIN
-	}
+//	public enum UserRole {
+//		GUEST, HOTELOWNER , ADMIN
+//	}
 
 	public UsersDto(Integer userId, String email, String password, String name, Long phoneNumber, LocalDate dateCreated,
-			UserRole userrole, LocalDate updatedAt) {
+			String userRole, LocalDate updatedAt) {
 		super();
 		this.userId = userId;
 		this.email = email;
@@ -32,7 +32,7 @@ public class UsersDto {
 		this.name = name;
 		this.phoneNumber = phoneNumber;
 		this.dateCreated = dateCreated;
-		this.userrole = userrole;
+		this.userRole = userRole;
 		this.updatedAt = updatedAt;
 	}
 
@@ -88,12 +88,12 @@ public class UsersDto {
 		this.dateCreated = dateCreated;
 	}
 
-	public UserRole getUserrole() {
-		return userrole;
+	public String getUserRole() {
+		return userRole;
 	}
 
-	public void setUserrole(UserRole userrole) {
-		this.userrole = userrole;
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
 	}
 
 	public LocalDate getUpdatedAt() {

@@ -8,6 +8,8 @@ package com.hexaware.hotelbookingsystem.entities;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -43,14 +45,14 @@ public class Reviews {
 
 	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "userId", nullable = false)
+	@JsonManagedReference
 	private Users user; // Many-to-One relationship with Users
 
 	@ManyToOne
 	@JoinColumn(name = "hotel_id", referencedColumnName = "hotelId", nullable = false)
+	@JsonManagedReference
 	private Hotels hotel; // Many-to-One relationship with Hotels
 
-	
-	
 	
 	public Reviews() {
 		super();
@@ -76,6 +78,7 @@ public class Reviews {
 	public void setReviewId(Integer reviewId) {
 		this.reviewId = reviewId;
 	}
+	
 
 	public Users getUser() {
 		return user;

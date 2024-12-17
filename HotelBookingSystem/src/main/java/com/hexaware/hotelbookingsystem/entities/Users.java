@@ -9,7 +9,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -45,33 +46,38 @@ import jakarta.validation.constraints.Pattern;
 		
 		private LocalDate dateCreated;
 		
-		@Enumerated(EnumType.STRING)
-		private UserRole userrole;
+		//@Enumerated(EnumType.STRING)
+		private String userRole;
 		
 		private LocalDate updatedAt;
 		
-		@OneToOne(mappedBy = "user", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
+		@OneToOne(mappedBy = "user", cascade = CascadeType.MERGE,  fetch = FetchType.LAZY)
 		@JsonBackReference
 	    private Hotels hotel; 
 
-	    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
+	    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE,  fetch = FetchType.LAZY)
+		@JsonBackReference
 	    private List<Bookings> bookings; 
 
-	    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
+	    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE,  fetch = FetchType.LAZY)
+		@JsonBackReference
 	    private List<Reviews> reviews; 
 	    
-	    @OneToMany(mappedBy="user", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
+	    
+	    @OneToMany(mappedBy="user", cascade = CascadeType.MERGE,  fetch = FetchType.LAZY)
+		@JsonBackReference
 	    private List<Payments> payments;
-	    public enum UserRole {
-	        GUEST, HOTELOWNER, ADMIN;
-	    }
+	    
+//	    public enum UserRole {
+//	        GUEST, HOTELOWNER, ADMIN;
+//	    }
 
 		public Users() {
 			super();
 		}
 
 		public Users(Integer userId, String email, String password, String name, Long phoneNumber,
-				LocalDate dateCreated, UserRole userrole, LocalDate updatedAt) {
+				LocalDate dateCreated, String userRole, LocalDate updatedAt) {
 			super();
 			this.userId = userId;
 			this.email = email;
@@ -79,7 +85,7 @@ import jakarta.validation.constraints.Pattern;
 			this.name = name;
 			this.phoneNumber = phoneNumber;
 			this.dateCreated = dateCreated;
-			this.userrole = userrole;
+			this.userRole = userRole;
 			this.updatedAt = updatedAt;
 		}
 
@@ -131,12 +137,12 @@ import jakarta.validation.constraints.Pattern;
 			this.dateCreated = dateCreated;
 		}
 
-		public UserRole getUserrole() {
-			return userrole;
+		public String getUserRole() {
+			return userRole;
 		}
 
-		public void setUserrole(UserRole userrole) {
-			this.userrole = userrole;
+		public void setUserRole(String role) {
+			this.userRole = role;
 		}
 
 		public LocalDate getUpdatedAt() {
@@ -182,7 +188,7 @@ import jakarta.validation.constraints.Pattern;
 		@Override
 		public String toString() {
 			return "Users [userId=" + userId + ", email=" + email + ", password=" + password + ", name=" + name
-					+ ", phoneNumber=" + phoneNumber + ", dateCreated=" + dateCreated + ", userrole=" + userrole
+					+ ", phoneNumber=" + phoneNumber + ", dateCreated=" + dateCreated + ", userrole=" + userRole
 					+ ", updatedAt=" + updatedAt + "]";
 		}
 		

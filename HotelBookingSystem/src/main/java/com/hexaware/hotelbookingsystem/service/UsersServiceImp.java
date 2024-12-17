@@ -10,11 +10,13 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hexaware.hotelbookingsystem.dto.UsersDto;
 import com.hexaware.hotelbookingsystem.entities.Users;
+
 import com.hexaware.hotelbookingsystem.repository.UsersRepository;
 
 import jakarta.transaction.Transactional;
@@ -43,7 +45,7 @@ public class UsersServiceImp implements IUsersService {
 		user.setName(userDto.getName());
 		user.setPhoneNumber(userDto.getPhoneNumber());
 		user.setDateCreated(userDto.getDateCreated());
-		user.setUserrole(Users.UserRole.valueOf(userDto.getUserrole().name()));
+		user.setUserRole(userDto.getUserRole());
 		user.setUpdatedAt(userDto.getUpdatedAt());
 		
        //user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -56,14 +58,15 @@ public class UsersServiceImp implements IUsersService {
 	public Users updateUsers(UsersDto userDto) {
 		
         Users user = new Users();
-		
+        //UserRole role = UserRole.valueOf(userDto.getUserrole());
+        
 		user.setUserId(userDto.getUserId());
 		user.setEmail(userDto.getEmail());
 		user.setPassword(userDto.getPassword());
 		user.setName(userDto.getName());
 		user.setPhoneNumber(userDto.getPhoneNumber());
 		user.setDateCreated(userDto.getDateCreated());
-		user.setUserrole(Users.UserRole.valueOf(userDto.getUserrole().name()));
+		user.setUserRole(userDto.getUserRole());
 		user.setUpdatedAt(userDto.getUpdatedAt());
 		
 		logger.info("Users update service is called");

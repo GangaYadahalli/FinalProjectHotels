@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.hexaware.hotelbookingsystem.dto.UsersDto;
-import com.hexaware.hotelbookingsystem.dto.UsersDto.UserRole;
+//import com.hexaware.hotelbookingsystem.dto.UsersDto.UserRole;
 import com.hexaware.hotelbookingsystem.entities.Users;
 import com.hexaware.hotelbookingsystem.repository.UsersRepository;
 
@@ -43,11 +43,11 @@ class UsersServiceImpTest {
 	@Test
 	@Disabled
 	void testAddUsersWithMocks() {
-		UsersDto user = new UsersDto(7, "Kiran@gmail.com", "kiran@2000", "Kiran",  8987651190L, LocalDate.parse("2024-01-12"),UserRole.GUEST, LocalDate.parse("2024-01-12"));
+		UsersDto user = new UsersDto(7, "Kiran@gmail.com", "kiran@2000", "Kiran",  8987651190L, LocalDate.parse("2024-01-12"), "GUEST", LocalDate.parse("2024-01-12"));
 	    
 
 	    
-	    Users mockUser = new Users(7, "Kiran@gmail.com", "kiran@2000", "Kiran",  8987651190L, LocalDate.parse("2024-01-12"),Users.UserRole.GUEST, LocalDate.parse("2024-01-12"));
+	    Users mockUser = new Users(7, "Kiran@gmail.com", "kiran@2000", "Kiran",  8987651190L, LocalDate.parse("2024-01-12"), "GUEST", LocalDate.parse("2024-01-12"));
 
 	    when(usersRepository.save(mockUser)).thenReturn(mockUser);
 	    
@@ -62,7 +62,7 @@ class UsersServiceImpTest {
 	@Disabled
 	void testAddUsers() {
 	
-		UsersDto userDto = new UsersDto(5, "anusha@gmail.com", "anusha@2004", "Anusha", 8908796731L, LocalDate.parse("2024-07-10"), UserRole.GUEST, LocalDate.parse("2024-07-10"));
+		UsersDto userDto = new UsersDto(5, "anusha@gmail.com", "anusha@2004", "Anusha", 8908796731L, LocalDate.parse("2024-07-10"), "GUEST", LocalDate.parse("2024-07-10"));
 
 		Users user=service.addUsers(userDto);
 
@@ -72,7 +72,7 @@ class UsersServiceImpTest {
 	@Test
 	@Disabled
 	void testUpdateUsers() {
-		UsersDto userDto=new UsersDto(5, "anusha@gmail.com", "anusha@2005", "Anusha", 8908796731L, LocalDate.parse("2024-07-10"), UserRole.GUEST, LocalDate.parse("2024-07-10"));
+		UsersDto userDto=new UsersDto(5, "anusha@gmail.com", "anusha@2005", "Anusha", 8908796731L, LocalDate.parse("2024-07-10"), "GUEST", LocalDate.parse("2024-07-10"));
 		Users user=service.updateUsers(userDto);
 		
 		assertNotNull(user);

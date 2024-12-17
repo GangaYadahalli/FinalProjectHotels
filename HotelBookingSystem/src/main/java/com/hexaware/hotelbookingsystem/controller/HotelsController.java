@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import com.hexaware.hotelbookingsystem.entities.Hotels;
 import com.hexaware.hotelbookingsystem.exception.HotelNotFoundException;
 import com.hexaware.hotelbookingsystem.service.IHotelsService;
 
+@CrossOrigin(origins="http://localhost:4200")
 @RestController
 @RequestMapping("/api/hotels")
 public class HotelsController {
@@ -41,7 +43,7 @@ public class HotelsController {
 		return  service.addHotels(hotelDto);
 	  }
 	@PutMapping("/update")
-	@PreAuthorize("hasAuthority('ADMIN')")
+	//@PreAuthorize("hasAuthority('ADMIN')")
 	public Hotels   update(@RequestBody HotelsDto hotelDto) {
 		
 		logger.info("Hotels object updated successfully");
@@ -50,7 +52,7 @@ public class HotelsController {
 		  
 	  }
 	@DeleteMapping("/delete/{hotelId}")
-	@PreAuthorize("hasAuthority('ADMIN')")
+	//@PreAuthorize("hasAuthority('ADMIN')")
 	 public String   delete(@PathVariable  Integer hotelId) {
 		  
 		service.deleteHotelsById(hotelId);
@@ -70,21 +72,21 @@ public class HotelsController {
 	  }
 	  
 	  @GetMapping("/getall")
-	  @PreAuthorize("hasAuthority('ADMIN')")
+	  //@PreAuthorize("hasAuthority('ADMIN')")
 	  public List<Hotels>  getAll(){
 		  
 		  return service.getAllHotels();
 		  
 	  }
 	  @GetMapping("/getByCity/{city}")
-	  @PreAuthorize("hasAuthority('GUEST')")
+	  //@PreAuthorize("hasAuthority('GUEST')")
 	  public List<Hotels> getByCity(@PathVariable String city){
 		  
 		  return service.getByCity(city);
 		  
 	  }
 	  @GetMapping("/getByRating/{rating}")
-	  @PreAuthorize("hasAuthority('GUEST')")
+	  //@PreAuthorize("hasAuthority('GUEST')")
 	  public List<Hotels> getByRating(@PathVariable Double rating){
 		  
 		  return service.getByRating(rating);

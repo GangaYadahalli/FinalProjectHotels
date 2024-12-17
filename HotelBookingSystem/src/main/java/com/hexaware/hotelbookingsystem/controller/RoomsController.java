@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,10 +24,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hexaware.hotelbookingsystem.dto.RoomsDto;
+import com.hexaware.hotelbookingsystem.dto.RoomsDto.RoomType;
 import com.hexaware.hotelbookingsystem.entities.Rooms;
+import com.hexaware.hotelbookingsystem.entities.Users;
 import com.hexaware.hotelbookingsystem.exception.RoomNotFoundException;
 import com.hexaware.hotelbookingsystem.service.IRoomsService;
 
+@CrossOrigin(origins="http://localhost:4200")
 @RestController
 @RequestMapping("/api/rooms")
 public class RoomsController {
@@ -43,7 +47,7 @@ public class RoomsController {
 		return  service.addRooms(roomDto);
 	  }
 	@PutMapping("/update")
-	@PreAuthorize("hasAuthority('ADMIN')")
+	//@PreAuthorize("hasAuthority('ADMIN')")
 	  public Rooms   update(@RequestBody RoomsDto roomDto) {
 		
 		logger.info("Rooms object updated successfully");
@@ -51,7 +55,7 @@ public class RoomsController {
 		  
 	  }
 	@DeleteMapping("/delete/{roomId}")
-	@PreAuthorize("hasAuthority('ADMIN')")
+	//@PreAuthorize("hasAuthority('ADMIN')")
 	  public String   delete(@PathVariable  Integer roomId) {
 		  
 		service.deleteRoomsById(roomId);
@@ -59,7 +63,7 @@ public class RoomsController {
 	  }
 	  
 	  @GetMapping("/getbyid/{roomId}")
-	  @PreAuthorize("hasAuthority('GUEST')")
+	  //@PreAuthorize("hasAuthority('GUEST')")
 	  public  Rooms  getById(@PathVariable Integer roomId) {
 		  Rooms room=null;
 		  room= service.getRoomById(roomId);
@@ -71,7 +75,7 @@ public class RoomsController {
 	  }
 	  
 	  @GetMapping("/getall")
-	  @PreAuthorize("hasAuthority('ADMIN')")
+	  //@PreAuthorize("hasAuthority('ADMIN')")
 	  public List<Rooms>  getAll(){
 		  
 		  return service.getAllRooms();
@@ -92,5 +96,6 @@ public class RoomsController {
 			  return service.updateCapacity(capacity, id);
 			  
 		  }
+		
 
 }

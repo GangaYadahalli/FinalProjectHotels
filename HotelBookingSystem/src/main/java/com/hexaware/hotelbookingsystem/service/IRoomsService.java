@@ -5,9 +5,12 @@
  * */package com.hexaware.hotelbookingsystem.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.hexaware.hotelbookingsystem.dto.RoomsDto;
+import com.hexaware.hotelbookingsystem.dto.RoomsDto.RoomType;
 import com.hexaware.hotelbookingsystem.entities.Rooms;
+import com.hexaware.hotelbookingsystem.entities.Users;
 
 public interface IRoomsService {
 	

@@ -8,11 +8,17 @@ package com.hexaware.hotelbookingsystem.entities;
 	import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
@@ -40,15 +46,17 @@ import jakarta.persistence.OneToMany;
 			private String description;
 			
 		
-			@ManyToOne
-			@JsonBackReference 
+			@ManyToOne(cascade = CascadeType.MERGE ,  fetch = FetchType.LAZY)
+			@JsonManagedReference
 		    @JoinColumn(name = "hotel_id")
 		    private Hotels hotel; 
 
 		    @OneToMany(mappedBy = "room")
+		    @JsonBackReference
 		    private List<Bookings> bookings; 
 		    
-		    @ManyToMany
+		    @ManyToMany( cascade = CascadeType.MERGE,  fetch = FetchType.LAZY)
+		    @JsonIgnore
 		    @JoinTable(
 		        name = "user_favorite_rooms", 
 		        joinColumns = @JoinColumn(name = "room_id"), 
@@ -56,6 +64,7 @@ import jakarta.persistence.OneToMany;
 		    )
 		    
 		    private List<Users> users;
+		    
 			public enum RoomType {
 				SINGLE, DOUBLE, SUITE
 			}

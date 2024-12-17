@@ -32,7 +32,7 @@ class UsersControllerTest {
 	@Disabled
 	void testInsert() {
 		
-		Users user = new Users(6, "kavana@gmail.com", "kavana@2000", "Kavana",8979678911L, LocalDate.parse("2024-03-20"), Users.UserRole.GUEST, LocalDate.parse("2024-03-20"));
+		Users user = new Users(6, "kavana@gmail.com", "kavana@2000", "Kavana",8979678911L, LocalDate.parse("2024-03-20"), "GUEST", LocalDate.parse("2024-03-20"));
 
 		ResponseEntity<Users>  response =  
 				restTemplate.postForEntity("http://localhost:8080/api/users/insert", user, Users.class);

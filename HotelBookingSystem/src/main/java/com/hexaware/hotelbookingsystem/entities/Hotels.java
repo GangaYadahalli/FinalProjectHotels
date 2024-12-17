@@ -5,7 +5,8 @@
  * */package com.hexaware.hotelbookingsystem.entities;
 	import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -24,6 +25,8 @@ import jakarta.validation.constraints.Size;
 
 
 	@Entity
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "hotelId")
 	public class Hotels {
 		
 		@Id
@@ -54,17 +57,22 @@ import jakarta.validation.constraints.Size;
 		 private Users user;
 		 
 		
-		 @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL ,  fetch = FetchType.LAZY)
-		 @JsonManagedReference
+		 @OneToMany(mappedBy = "hotel", cascade = CascadeType.MERGE ,  fetch = FetchType.LAZY)
+		 @JsonBackReference
 		 private List<Rooms> rooms; 
 
-		 @OneToMany(mappedBy = "hotel" , cascade = CascadeType.ALL ,  fetch = FetchType.LAZY)
+		 
+		 @OneToMany(mappedBy = "hotel" , cascade = CascadeType.MERGE ,  fetch = FetchType.LAZY)
+		 @JsonBackReference
 		 private List<Reviews> reviews;
 		    
-		 @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
+		 @OneToMany(mappedBy = "hotel", cascade = CascadeType.MERGE,  fetch = FetchType.LAZY)
+		 @JsonBackReference
 		 private List<Bookings> bookings; 
 
-		 @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
+		 
+		 @OneToMany(mappedBy = "hotel", cascade = CascadeType.MERGE,  fetch = FetchType.LAZY)
+		 @JsonBackReference
 		 private List<Payments> payments; 
 		 
 		public Hotels() {

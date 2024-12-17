@@ -6,6 +6,7 @@
 package com.hexaware.hotelbookingsystem.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hexaware.hotelbookingsystem.dto.RoomsDto;
+import com.hexaware.hotelbookingsystem.dto.RoomsDto.RoomType;
 import com.hexaware.hotelbookingsystem.entities.Hotels;
 import com.hexaware.hotelbookingsystem.entities.Rooms;
+import com.hexaware.hotelbookingsystem.entities.Users;
 import com.hexaware.hotelbookingsystem.repository.RoomsRepository;
 
 import jakarta.transaction.Transactional;
@@ -92,6 +95,9 @@ public class RoomsServiceImp implements IRoomsService {
 		
 		return repo.updateCapacity(capacity, roomId);
 	}
+
+
+
 
 	
 
