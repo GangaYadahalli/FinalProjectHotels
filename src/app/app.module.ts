@@ -23,6 +23,10 @@ import { SearchRoomsComponent } from './components/search-rooms/search-rooms.com
 import { UpdateUsersComponent } from './components/update-users/update-users.component';
 import { UpdateRoomsComponent } from './components/update-rooms/update-rooms.component';
 import { UpdateHotelsComponent } from './components/update-hotels/update-hotels.component';
+import { UpdatePhoneNumberComponent } from './components/update-phone-number/update-phone-number.component';
+import { UpdataCapacityComponent } from './components/updata-capacity/updata-capacity.component';
+import { UpdatePricePerNightComponent } from './components/update-price-per-night/update-price-per-night.component';
+import { UpdatePasswordComponent } from './components/update-password/update-password.component';
 
 
 @NgModule({
@@ -41,7 +45,11 @@ import { UpdateHotelsComponent } from './components/update-hotels/update-hotels.
     SearchRoomsComponent,
     UpdateUsersComponent,
     UpdateRoomsComponent,
-    UpdateHotelsComponent
+    UpdateHotelsComponent,
+    UpdatePhoneNumberComponent,
+    UpdataCapacityComponent,
+    UpdatePricePerNightComponent,
+    UpdatePasswordComponent
   ],
   imports: [
     BrowserModule,

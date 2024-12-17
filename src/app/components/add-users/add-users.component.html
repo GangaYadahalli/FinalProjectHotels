@@ -165,9 +165,11 @@
       name="password"
       ngModel
       required
+      minlength="5"
     />
     <div *ngIf="userForm.controls['password']?.invalid && userForm.controls['password']?.touched" class="text-danger">
       <small *ngIf="userForm.controls['password']?.hasError('required')">Password is required.</small>
+      <small *ngIf="userForm.controls['password']?.hasError('minlength')">Password must be at least 5 characters long.</small>
     </div>
   </div>
 
@@ -188,7 +190,7 @@
   </div>
 
   <!-- User Role -->
-  <div class="form-group">
+  <!-- <div class="form-group">
     <label for="userRole">Select ROLE:</label>
     <select
       id="userRole"
@@ -205,7 +207,42 @@
     <div *ngIf="userForm.controls['userRole']?.invalid && userForm.controls['userRole']?.touched" class="text-danger">
       <small *ngIf="userForm.controls['userRole']?.hasError('required')">Role is required.</small>
     </div>
-  </div>
+  </div> -->
+  <!-- <div class="form-group">
+    <label for="userRole">Select ROOM TYPE:</label>
+    <select
+        id="userRole"
+        class="form-control"
+        name="userRole"
+        ngModel
+        #roomType="ngModel"
+        required
+    >
+        <option [value]="null" disabled selected>Select Rolee</option>
+        <option *ngFor="let role of userRole" [value]="role">{{ role }}</option>
+    </select>
+   
+</div> -->
+<div class="form-group">
+  <label for="userRole">User Role</label>
+  <select
+    id="userRole"
+    class="form-control"
+    name="userRole"
+    required
+    [(ngModel)]="formData.userRole"
+    #userRole="ngModel"
+  >
+    <option value="" disabled selected>Select a role</option>
+    <option value="ADMIN">Admin</option>
+    <option value="GUEST">Guest</option>
+    <option value="HOTELOWNER">HotelOwner</option>
+  </select>
+  <span style="color: red" *ngIf="userRole.touched && userRole.invalid">
+    User Role is required
+  </span>
+</div>
+
 
   <!-- Updated At -->
   <div class="form-group">
@@ -231,5 +268,7 @@
   >
     Add User
   </button>
+  
 </form>
+
 

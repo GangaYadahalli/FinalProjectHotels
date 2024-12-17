@@ -14,21 +14,28 @@ import { SecurityComponent } from './components/security/security.component';
 import { UpdateUsersComponent } from './components/update-users/update-users.component';
 import { UpdateRoomsComponent } from './components/update-rooms/update-rooms.component';
 import { UpdateHotelsComponent } from './components/update-hotels/update-hotels.component';
+import { UpdatePhoneNumberComponent } from './components/update-phone-number/update-phone-number.component';
+import { UpdataCapacityComponent } from './components/updata-capacity/updata-capacity.component';
+import { UpdatePricePerNightComponent } from './components/update-price-per-night/update-price-per-night.component';
+import { UpdatePasswordComponent } from './components/update-password/update-password.component';
 
 
 const routes: Routes = [
 
   {path:'home',component:AppComponent},
-  { path: 'login', component: SecurityComponent},
-  { path: 'register', component: AddUsersComponent },
+  {path:'login',children:[
+  { path: 'login', component: SecurityComponent},]
+  },
   //{ path: 'register', component: RegistrationComponent },
   {
     path: 'users', children: [
       { path: 'add', component: AddUsersComponent },      
       { path: 'display', component: DisplayUsersComponent }, 
       {path:'search/:input',component:SearchComponent},
-      { path: 'updatePhoneNumber/:id/:phoneNumber', component: UpdateUsersComponent },
+      //{ path: 'updatePhoneNumber/:id/:phoneNumber', component: UpdateUsersComponent },
       {path:'update',component:UpdateUsersComponent},
+      { path: 'updatePhoneNumber', component: UpdatePhoneNumberComponent },
+      {path:'updatePassword',component:UpdatePasswordComponent}
 
     ]
   },
@@ -37,7 +44,9 @@ const routes: Routes = [
       { path: 'add', component: AddRoomsComponent },      
       { path: 'display', component: DisplayRoomsComponent }, 
       {path:'search/:input',component:SearchRoomsComponent},
-      {path:'update',component:UpdateRoomsComponent}
+      {path:'update',component:UpdateRoomsComponent},
+      {path:'updateCapacity',component:UpdataCapacityComponent},
+      {path:'updatePricePerNight',component:UpdatePricePerNightComponent}
      
       
     ]
@@ -47,7 +56,8 @@ const routes: Routes = [
       { path: 'add', component: AddHotelsComponent },      
       { path: 'display', component: DisplayHotelsComponent }, 
       {path:'search/:input',component:SearchHotelsComponent},
-      {path:'update',component:UpdateHotelsComponent}
+      {path:'update',component:UpdateHotelsComponent},
+      
     ]
   },
   

@@ -63,13 +63,15 @@ import { UsersService } from 'src/app/services/users.service';
 export class AddUsersComponent {
 
 
-  userRoles = Object.values(UserRole).filter(key => isNaN(Number(key)));; 
+  userRole = Object.values(UserRole).filter(key => isNaN(Number(key)));; 
 
   
   constructor(private  service:UsersService){
 
   }
-
+  formData: any = {
+    userRole: null, // Ensure it starts with a null or empty value
+  };
 
 
   addUser(user:Users){
@@ -87,4 +89,6 @@ export class AddUsersComponent {
 
             );
 }
+
+
 }

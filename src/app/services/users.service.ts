@@ -29,30 +29,21 @@ export class UsersService {
         return  this.http.put<Users>(this.baseURL+"update",user);
 
     }
-    //   getAll():Observable<Users[]>{
+      getAll():Observable<Users[]>{
 
-    //     return  this.http.get<Users[]>(this.baseURL+"getall");
-
-
-
-    // }
-    // delete(userId: number, token: string): Observable<string> {
-    //   const tokenString = 'Bearer ' + token;
-    //   console.log("Authorization Token:", tokenString); // Format the token
-    //   const headers = new HttpHeaders({
-    //     Authorization: tokenString, // Add Authorization header
-    //   });
-  
-    //   return this.http.delete<string>(`${this.baseURL}delete/${userId}`, { headers });
-    // }
-    
-
-    delete(userId:number):Observable<string>{
-
-      return  this.http.delete<string>(this.baseURL+`delete/${userId}`);
+        return  this.http.get<Users[]>(this.baseURL+"getall");
 
     }
-   
+    updatePhoneNumber(id: number, phno: number): Observable<any> {
+      
+      const url = `${this.baseURL}updatePhoneNumber/${phno}/${id}`;
+      
+      return this.http.put<any>(url, {});
+  }
+  
+    updatePassword(id: number,pword: string): Observable<number> {
+      return this.http.put<number>(`${this.baseURL}updatePassword/${pword}/${id}`, {});
+    }
  
   findById(data:string):Observable<Users[]>{
 
@@ -70,17 +61,7 @@ export class UsersService {
   }
  
 
-  updatePhoneNumber(id: number, phoneNumber: number): Observable<string> {
-    return this.http.put<string>(`${this.baseURL}/updatePhoneNumber/${id}`, null, {
-      params: { phoneNumber: phoneNumber.toString() },
-    });
-  }
-
-  updatePassword(id: number, password: string): Observable<string> {
-    return this.http.put<string>(`${this.baseURL}/updatePassword/${id}`, null, {
-      params: { password },
-    });
-  }
+ 
   }
     
     

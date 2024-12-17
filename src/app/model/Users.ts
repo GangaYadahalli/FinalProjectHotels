@@ -13,6 +13,6 @@ export enum UserRole {
       name:string='';
       phoneNumber:number=0;
       dateCreated:Date=new Date() ;
-      userRole: UserRole | null = null;;
+      userRole: string='';
       updatedAt:Date=new Date();
   }
